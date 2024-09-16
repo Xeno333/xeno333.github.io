@@ -32,11 +32,11 @@ nav ul li a:hover {
 }
 section {
     padding: 30px;
-    max-width: 900px;
-    margin: 20px auto;
+    margin: 40px;
     background-color: #333;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    word-wrap: break-word;
 }
 footer {
     text-align: center;
