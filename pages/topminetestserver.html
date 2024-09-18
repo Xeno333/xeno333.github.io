@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Xeno333</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <header class="center">
+        <h1>Xeno333</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li class="center"><a href="../index.html">Home</a></li>
+            <li class="center"><a href="../about.html">About</a></li>
+            <li class="center"><a href="../projects.html">Projects</a></li>
+            <li class="center"><a href="../contact.html">Contact</a></li>
+            <li class="center"><a href="../donate.html">Donate</a></li>
+            <li class="center"><a href="../pages.html">Pages</a></li>
+        </ul>
+    </nav>
+
+    <section>
+        <dev id="server"></div>
+    </section>
+    
+    <script>
+        const servername = "Imperium";
+        const serverlist = 'https://servers.minetest.net/list'
+
+
+        async function update() {
+            var serverg;
+            try {
+                const response = await fetch(serverlist);
+                const data = await response.json();
+
+                var found = "";
+                var score = 0;
+                var players = "";
+
+                data.list.forEach(server => {
+                    if (server.clients > score) {
+                        score = server.clients;
+                        found = server.name;
+                        players = "";
+                        server.clients_list.forEach(name => {
+                            players = players + "<li>" + name + "</li>";
+                        });
+                    }
+                });
+
+                document.getElementById('server').innerHTML = "<h1 class=\"center lightgreen\">" + found + "</h1><br><br><h2>Player count: " + score + "</h2><h3><ul>"  + players + "</ul></h3>";
+            } catch (error) {
+                console.log('Error fetching data:' + error);
+                document.getElementById('server').innerHTML = `Please connect to the internet`;
+            }
+        }
+
+        update();
+        setInterval(update, 5000);
+    </script>
+
+    <footer>
+        <p>&copy; 2024 Xeno333. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
